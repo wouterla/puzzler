@@ -1,0 +1,18 @@
+Experiment in TDD to grow an algorithm to solve my kids' 'smart game' puzzles.
+
+The puzzles consist of a grid board of 11x5, upon which 12 coloured pieces of
+varying shapes (consisting of small, joined balls) can be placed. The object of
+the puzzle is, given a certain starting state (with a number of pieces placed
+on the board) to fill the complete board with the rest of the pieces.
+
+It's harder than you'd think, really!
+
+This project is simply to create a virtual version of the gameboard and pieces
+(done, as long as no-one expects fancy (or any) graphics), and an algorithm to 
+solve the puzzles. The challenge is to do this Test Driven, and see whether
+growing such an algorithm works even for someone who is as algorithmically 
+challenged like me.
+
+Wouter
+wouter@lagerweij.com
+www.lagerweij.com
