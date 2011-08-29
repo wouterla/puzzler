@@ -7,10 +7,6 @@ import org.junit.Test;
 
 public class PieceTest {
 
-	private final static Piece pieceC = new Piece(new char[][] {{ 'C', 'C' }, { '0', 'C' }, { '0', 'C' }, { '0', 'C' }});
-	private final static Piece pieceK = new Piece(new char[][] {{ 'K', 'K' }, { 'K', 'K' }});
-	private final static Piece pieceF = new Piece(new char[][] {{ 'F', 'F' }, { '0', 'F' }});
-	
 	@Before
 	public void setUp() {
 				
@@ -18,57 +14,57 @@ public class PieceTest {
 	
 	@Test
 	public void testGetElementAt() {
-		assertEquals('K', pieceK.getElementAt(0, 0));
+		assertEquals('K', Pieces.pieceK.getElementAt(0, 0));
 	}
 	
 	@Test
 	public void testGetEmptyElementAt() {
-		assertEquals('0', pieceF.getElementAt(1, 0));
+		assertEquals('0', Pieces.pieceF.getElementAt(1, 0));
 	}
 
 	@Test
 	public void testGetWidth() {
-		assertEquals(2, pieceC.getWidth());
+		assertEquals(2, Pieces.pieceC.getWidth());
 	}
 	
 	@Test
 	public void testGetHeight() {
-		assertEquals(4, pieceC.getHeight());
+		assertEquals(4, Pieces.pieceC.getHeight());
 	}
 	
 	@Test
 	public void testGetHeightForTurnedOnceOrientation() {
-		assertEquals(2, pieceC.getHeight(Piece.TURNED_90_DEGREES));
+		assertEquals(2, Pieces.pieceC.getHeight(Piece.TURNED_90_DEGREES));
 	}
 
 	@Test
 	public void testGetHeightForTurnedTwoTimesOrientation() {
-		assertEquals(4, pieceC.getHeight(Piece.TURNED_180_DEGREES));
+		assertEquals(4, Pieces.pieceC.getHeight(Piece.TURNED_180_DEGREES));
 	}
 
 	@Test
 	public void testGetHeightForTurnedThreeTimesOrientation() {
-		assertEquals(2, pieceC.getHeight(Piece.TURNED_270_DEGREES));
+		assertEquals(2, Pieces.pieceC.getHeight(Piece.TURNED_270_DEGREES));
 	}
 
 	@Test
 	public void testGetWidthForTurnedOnceOrientation() {
-		assertEquals(4, pieceC.getWidth(Piece.TURNED_90_DEGREES));
+		assertEquals(4, Pieces.pieceC.getWidth(Piece.TURNED_90_DEGREES));
 	}
 
 	@Test
 	public void testGetWidthForTurnedTwoTimesOrientation() {
-		assertEquals(2, pieceC.getWidth(Piece.TURNED_180_DEGREES));
+		assertEquals(2, Pieces.pieceC.getWidth(Piece.TURNED_180_DEGREES));
 	}
 
 	@Test
 	public void testGetWidthForTurnedThreeTimesOrientation() {
-		assertEquals(4, pieceC.getWidth(Piece.TURNED_270_DEGREES));
+		assertEquals(4, Pieces.pieceC.getWidth(Piece.TURNED_270_DEGREES));
 	}
 
 	@Test 
 	public void testGetElementsForDefaultOrientation() {
-		char[][] elements = pieceF.getElements(Piece.DEFAULT_ORIENTATION);
+		char[][] elements = Pieces.pieceF.getElements(Piece.DEFAULT_ORIENTATION);
 		assertEquals('F', elements[0][0]);
 		assertEquals('F', elements[0][1]);
 		assertEquals('0', elements[1][0]);
@@ -78,7 +74,7 @@ public class PieceTest {
 	
 	@Test 
 	public void testGetElementsForTurnedOnce() {
-		char[][] elements = pieceF.getElements(Piece.TURNED_90_DEGREES);
+		char[][] elements = Pieces.pieceF.getElements(Piece.TURNED_90_DEGREES);
 		assertEquals('F', elements[0][0]);
 		assertEquals('F', elements[0][1]);
 		assertEquals('F', elements[1][0]);
@@ -87,25 +83,59 @@ public class PieceTest {
 
 	@Test 
 	public void testTurn() {
-		char[][] elements = Piece.turn(pieceF.getElements());
+		char[][] elements = Piece.turn(Pieces.pieceF.getElements());
 		assertEquals('F', elements[0][0]);
 		assertEquals('F', elements[0][1]);
 		assertEquals('F', elements[1][0]);
 		assertEquals('0', elements[1][1]);		
 	}
-
+	
 	@Test
 	public void testGetRightMosteElements() {
-		char[] elements = Piece.getColumnOfArray(pieceF.getElements(), pieceF.getWidth() - 1);
+		char[] elements = Piece.getColumnOfArray(Pieces.pieceF.getElements(), Pieces.pieceF.getWidth() - 1);
 		assertEquals('F', elements[0]);
 		assertEquals('F', elements[1]);
 	}
 	
 	@Test
 	public void testGetNextColumn() {
-		char[] elements = Piece.getColumnOfArray(pieceF.getElements(), pieceF.getWidth() - 2);
+		char[] elements = Piece.getColumnOfArray(Pieces.pieceF.getElements(), Pieces.pieceF.getWidth() - 2);
 		assertEquals('F', elements[0]);
 		assertEquals('0', elements[1]);		
 	}
+
+	@Test 
+	public void testGetElementsForDefaultOrientationOfPieceC() {
+		char[][] elements = Pieces.pieceC.getElements(Piece.DEFAULT_ORIENTATION);
+		assertEquals('C', elements[0][0]);
+		assertEquals('C', elements[0][1]);
+		assertEquals('0', elements[1][0]);
+		assertEquals('C', elements[1][1]);
+		assertEquals('0', elements[2][0]);
+		assertEquals('C', elements[2][1]);
+		assertEquals('0', elements[3][0]);
+		assertEquals('C', elements[3][1]);
+	}
 	
+	@Test
+	public void testReverseRow() {
+		char[] elements = new char[] { '1', '2', '3' };
+		char[] reversed = Piece.reverseRow(elements);
+		assertEquals('3', reversed[0]);
+		assertEquals('2', reversed[1]);
+		assertEquals('1', reversed[2]);
+	}
+	
+	@Test
+	public void testFlip() {
+		char[][] elements = Piece.flip(Pieces.pieceC.getElements());
+		assertEquals('C', elements[0][0]);
+		assertEquals('C', elements[0][1]);
+		assertEquals('C', elements[1][0]);
+		assertEquals('0', elements[1][1]);
+		assertEquals('C', elements[2][0]);
+		assertEquals('0', elements[2][1]);
+		assertEquals('C', elements[3][0]);
+		assertEquals('0', elements[3][1]);
+	}
 }
